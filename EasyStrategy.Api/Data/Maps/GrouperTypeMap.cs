@@ -13,6 +13,9 @@ namespace EasyStrategy.Api.Data.Maps
         public void Configure(EntityTypeBuilder<GrouperType> builder)
         {
             builder.Property(_ => _.Name).IsRequired();
+
+            builder.HasMany(_ => _.Groupers).WithOne(_ => _.Type);
+            builder.HasOne(_ => _.Child).WithOne(_ => _.Parent).IsRequired(false);
         }
     }
 }

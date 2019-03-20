@@ -15,6 +15,7 @@ namespace EasyStrategy.Api.Data.Maps
         {
             builder.HasOne(_ => _.Grouper).WithMany().IsRequired(false);
             builder.HasIndex(_ => _.ReferenceId);
+            builder.HasMany(_ => _.Numbers).WithOne(_ => _.Sale).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

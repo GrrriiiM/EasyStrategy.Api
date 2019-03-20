@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyStrategy.Api.TransferObjects
 {
-    public class Sale
+    public class Sale : Dictionary<string, object>
     {
         public long IntervalTypeId { get; set; }
         public DateTime IntervalBegin { get; set; }
@@ -16,6 +16,5 @@ namespace EasyStrategy.Api.TransferObjects
         public string GrouperColor { get; set; }
         public long ReferenceId { get; set; }
         public string ReferenceDescription { get; set; }
-        public double Value { get; set; }
     }
 }

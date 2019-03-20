@@ -15,6 +15,6 @@ namespace EasyStrategy.Domain.Sales
         public virtual Grouper Grouper { get; set; }
         public long ReferenceId { get; set; }
         public string ReferenceDescription { get; set; }
-        public double Value { get; set; }
+        public virtual ICollection<SaleNumberValue> Numbers { get; set; }
     }
 }

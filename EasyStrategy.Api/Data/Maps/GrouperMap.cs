@@ -14,6 +14,7 @@ namespace EasyStrategy.Api.Data.Maps
         {
             builder.Property(_ => _.Name).IsRequired();
             builder.HasOne(_ => _.Type).WithMany().IsRequired();
+            builder.HasMany(_ => _.Childrens).WithOne(_ => _.Parent);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace EasyStrategy.Api.Helpers
     {
         public static TransferObjects.Sale ToTransferObject(Sale obj)
         {
-            return new TransferObjects.Sale
+            var ret =  new TransferObjects.Sale
             {
                 IntervalTypeId = obj.IntervalType.Id,
                 IntervalBegin = obj.IntervalBegin,
@@ -22,8 +22,11 @@ namespace EasyStrategy.Api.Helpers
                 GrouperColor = obj.Grouper != null ? obj.Grouper.ReferenceColorRGB : "",
                 ReferenceId = obj.ReferenceId,
                 ReferenceDescription = obj.ReferenceDescription,
-                Value = obj.Value
             };
+
+            obj.Numbers.ToList().ForEach(_ => ret.Add(_.ValueType.Name, _.Value));
+
+            return ret;
         }
     }
 }

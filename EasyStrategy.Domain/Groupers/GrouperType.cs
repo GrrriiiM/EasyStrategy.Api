@@ -13,5 +13,8 @@ namespace EasyStrategy.Domain.Groupers
         public string ReferenceColorRGB { get; set; }
         public string ReferenceIcon { get; set; }
         public int Order { get; set; }
+
+        public virtual GrouperType Child { get; set; }
+        public virtual ICollection<Grouper> Groupers { get; set; }
     }
 }

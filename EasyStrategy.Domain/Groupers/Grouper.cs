@@ -19,5 +19,6 @@ namespace EasyStrategy.Domain.Groupers
         public string ReferenceIcon { get; private set; }
         public int Order { get; private set; }
         public bool IsTotal { get; private set; }
+        public virtual ICollection<Grouper> Childrens { get; private set; }
     }
 }

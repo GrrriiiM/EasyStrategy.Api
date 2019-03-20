@@ -9,4 +9,10 @@ namespace EasyStrategy.Domain.Sales
         public string Name { get; set; }
         public string Description { get; set; }
     }
+
+    public enum SaleIntervalTypeEnum
+    {
+        Hour = 1,
+        Day = 2
+    }
 }

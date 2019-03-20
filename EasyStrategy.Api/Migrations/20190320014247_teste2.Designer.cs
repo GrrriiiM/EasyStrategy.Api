@@ -3,14 +3,16 @@ using System;
 using EasyStrategy.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyStrategy.Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    partial class EasyContextModelSnapshot : ModelSnapshot
+    [Migration("20190320014247_teste2")]
+    partial class teste2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,8 +256,7 @@ namespace EasyStrategy.Api.Migrations
                 {
                     b.HasOne("EasyStrategy.Domain.Sales.Sale", "Sale")
                         .WithMany("Numbers")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SaleId");
 
                     b.HasOne("EasyStrategy.Domain.Sales.SaleValueType", "ValueType")
                         .WithMany()

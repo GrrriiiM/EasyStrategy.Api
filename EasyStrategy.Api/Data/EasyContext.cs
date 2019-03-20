@@ -23,7 +23,8 @@ namespace EasyStrategy.Api.Data
         public DbSet<GrouperAggregationGrouper> GrouperAggregationGroupers { get; set; }
         public DbSet<SaleIntervalType> SaleIntervalTypes { get; set; }
         public DbSet<Sale> Sales { get; set; }
-        public DbSet<SaleTarget> SaleTargets { get; set; }
+        public DbSet<SaleNumberValue> SaleNumberValues { get; set; }
+        public DbSet<SaleValueType> SaleValueTypes { get; set; }
 
 
 

@@ -3,14 +3,16 @@ using System;
 using EasyStrategy.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyStrategy.Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    partial class EasyContextModelSnapshot : ModelSnapshot
+    [Migration("20190317191100_teste1")]
+    partial class teste1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,6 +136,8 @@ namespace EasyStrategy.Api.Migrations
 
                     b.Property<long>("ReferenceId");
 
+                    b.Property<double>("Value");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GrouperAggregationId");
@@ -163,36 +167,40 @@ namespace EasyStrategy.Api.Migrations
                     b.ToTable("SaleIntervalTypes");
                 });
 
-            modelBuilder.Entity("EasyStrategy.Domain.Sales.SaleNumberValue", b =>
+            modelBuilder.Entity("EasyStrategy.Domain.Sales.SaleTarget", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("SaleId");
+                    b.Property<long?>("GrouperAggregationId");
 
-                    b.Property<decimal>("Value");
+                    b.Property<long?>("GrouperId");
 
-                    b.Property<long?>("ValueTypeId");
+                    b.Property<long?>("GrouperTypeId");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("IntervalBegin");
 
-                    b.HasIndex("SaleId");
+                    b.Property<DateTime>("IntervalEnd");
 
-                    b.HasIndex("ValueTypeId");
+                    b.Property<long?>("IntervalTypeId");
 
-                    b.ToTable("SaleNumberValues");
-                });
+                    b.Property<string>("ReferenceDescription");
 
-            modelBuilder.Entity("EasyStrategy.Domain.Sales.SaleValueType", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("ReferenceId");
 
-                    b.Property<string>("Name");
+                    b.Property<double>("Target");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SaleValueTypes");
+                    b.HasIndex("GrouperAggregationId");
+
+                    b.HasIndex("GrouperId");
+
+                    b.HasIndex("GrouperTypeId");
+
+                    b.HasIndex("IntervalTypeId");
+
+                    b.ToTable("SaleTargets");
                 });
 
             modelBuilder.Entity("EasyStrategy.Domain.Groupers.Grouper", b =>
@@ -250,16 +258,23 @@ namespace EasyStrategy.Api.Migrations
                         .HasForeignKey("IntervalTypeId");
                 });
 
-            modelBuilder.Entity("EasyStrategy.Domain.Sales.SaleNumberValue", b =>
+            modelBuilder.Entity("EasyStrategy.Domain.Sales.SaleTarget", b =>
                 {
-                    b.HasOne("EasyStrategy.Domain.Sales.Sale", "Sale")
-                        .WithMany("Numbers")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EasyStrategy.Domain.Sales.SaleValueType", "ValueType")
+                    b.HasOne("EasyStrategy.Domain.Groupers.GrouperAggregation", "GrouperAggregation")
                         .WithMany()
-                        .HasForeignKey("ValueTypeId");
+                        .HasForeignKey("GrouperAggregationId");
+
+                    b.HasOne("EasyStrategy.Domain.Groupers.Grouper", "Grouper")
+                        .WithMany()
+                        .HasForeignKey("GrouperId");
+
+                    b.HasOne("EasyStrategy.Domain.Groupers.GrouperType", "GrouperType")
+                        .WithMany()
+                        .HasForeignKey("GrouperTypeId");
+
+                    b.HasOne("EasyStrategy.Domain.Sales.SaleIntervalType", "IntervalType")
+                        .WithMany()
+                        .HasForeignKey("IntervalTypeId");
                 });
 #pragma warning restore 612, 618
         }
